@@ -1,0 +1,16 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <declare-styleable name="FoldingTabBar">
+        <attr name="menu" format="reference"/>
+        <attr name="itemPadding" format="dimension"/>
+        <attr name="mainImage" format="reference"/>
+        <attr name="selectionColor" format="color"/>
+    </declare-styleable>
+</resources>
