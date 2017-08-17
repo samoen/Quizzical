@@ -53,5 +53,6 @@ class EditActivity : AppCompatActivity() {
                 6-> textView.text = "F"
             }
         }
+        button_clear_questions.setOnClickListener { GlobalObject.ClearQuestions() }
     }
 }

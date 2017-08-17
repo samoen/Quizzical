@@ -32,9 +32,12 @@ class MainActivity : AppCompatActivity() {
 
         if(GlobalObject.saveQuestions){
             SaveQuestions()
-        }else{
-            ReadDB()
+            GlobalObject.saveQuestions = false
         }
+        if(CheckDBexist()){
+            ReadDBquestions()
+        }
+        ReadDBscores()
         InitViews()
         RetryQuiz()
     }
@@ -48,7 +51,7 @@ class MainActivity : AppCompatActivity() {
             pultusORM.drop(ScoreTime())
             pultusORM.drop(QuestionList())
             pultusORM.drop(DataExists())
-            GlobalObject.ClearQuestions()
+            GlobalObject.dbexist = false
             this.recreate()
         }
         button_reset.setOnClickListener { RetryQuiz() }
@@ -165,38 +168,41 @@ class MainActivity : AppCompatActivity() {
         st.time = chronometer_time.text as String
         pultusORM.save(st)
     }
-    fun ReadDB(){
+    fun ReadDBscores(){
         val scoretimes = pultusORM.find(ScoreTime())
         for (v in scoretimes) {
             val st = v as ScoreTime
             history.add(Pair(st.score,st.time))
         }
+    }
 
+    fun CheckDBexist():Boolean{
         val exists = pultusORM.find(DataExists())
         for (v in exists){
             val e = v as DataExists
             if (e.data_exists){
-                GlobalObject.dbexist = true
+                return true
             }
         }
+        return false
+    }
 
+    fun ReadDBquestions(){
         val questionlists = pultusORM.find(QuestionList())
         for (v in questionlists){
             val V = v as QuestionList
-            if(GlobalObject.dbexist){
-                GlobalObject.ClearQuestions()
-                GlobalObject.questions.add(Question(V.q0q,V.q0a,V.q0b,V.q0c,V.q0d,V.q0e,V.q0f,V.q0g))
-                GlobalObject.questions.add(Question(V.q1q,V.q1a,V.q1b,V.q1c,V.q1d,V.q1e,V.q1f,V.q1g))
-                GlobalObject.questions.add(Question(V.q2q,V.q2a,V.q2b,V.q2c,V.q2d,V.q2e,V.q2f,V.q2g))
-                GlobalObject.questions.add(Question(V.q3q,V.q3a,V.q3b,V.q3c,V.q3d,V.q3e,V.q3f,V.q3g))
-                GlobalObject.questions.add(Question(V.q4q,V.q4a,V.q4b,V.q4c,V.q4d,V.q4e,V.q4f,V.q4g))
-                GlobalObject.questions.add(Question(V.q5q,V.q5a,V.q5b,V.q5c,V.q5d,V.q5e,V.q5f,V.q5g))
-                GlobalObject.questions.add(Question(V.q6q,V.q6a,V.q6b,V.q6c,V.q6d,V.q6e,V.q6f,V.q6g))
-                GlobalObject.questions.add(Question(V.q7q,V.q7a,V.q7b,V.q7c,V.q7d,V.q7e,V.q7f,V.q7g))
-                GlobalObject.questions.add(Question(V.q8q,V.q8a,V.q8b,V.q8c,V.q8d,V.q8e,V.q8f,V.q8g))
-                GlobalObject.questions.add(Question(V.q9q,V.q9a,V.q9b,V.q9c,V.q9d,V.q9e,V.q9f,V.q9g))
-                GlobalObject.questions.add(Question(V.q10q,V.q10a,V.q10b,V.q10c,V.q10d,V.q10e,V.q10f,V.q10g))
-            }
+            GlobalObject.ClearQuestions()
+            GlobalObject.questions.add(Question(V.q0q,V.q0a,V.q0b,V.q0c,V.q0d,V.q0e,V.q0f,V.q0g))
+            GlobalObject.questions.add(Question(V.q1q,V.q1a,V.q1b,V.q1c,V.q1d,V.q1e,V.q1f,V.q1g))
+            GlobalObject.questions.add(Question(V.q2q,V.q2a,V.q2b,V.q2c,V.q2d,V.q2e,V.q2f,V.q2g))
+            GlobalObject.questions.add(Question(V.q3q,V.q3a,V.q3b,V.q3c,V.q3d,V.q3e,V.q3f,V.q3g))
+            GlobalObject.questions.add(Question(V.q4q,V.q4a,V.q4b,V.q4c,V.q4d,V.q4e,V.q4f,V.q4g))
+            GlobalObject.questions.add(Question(V.q5q,V.q5a,V.q5b,V.q5c,V.q5d,V.q5e,V.q5f,V.q5g))
+            GlobalObject.questions.add(Question(V.q6q,V.q6a,V.q6b,V.q6c,V.q6d,V.q6e,V.q6f,V.q6g))
+            GlobalObject.questions.add(Question(V.q7q,V.q7a,V.q7b,V.q7c,V.q7d,V.q7e,V.q7f,V.q7g))
+            GlobalObject.questions.add(Question(V.q8q,V.q8a,V.q8b,V.q8c,V.q8d,V.q8e,V.q8f,V.q8g))
+            GlobalObject.questions.add(Question(V.q9q,V.q9a,V.q9b,V.q9c,V.q9d,V.q9e,V.q9f,V.q9g))
+            GlobalObject.questions.add(Question(V.q10q,V.q10a,V.q10b,V.q10c,V.q10d,V.q10e,V.q10f,V.q10g))
         }
     }
     fun SaveQuestions(){
