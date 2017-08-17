@@ -40,6 +40,7 @@ class EditActivity : AppCompatActivity() {
             editText6.text.clear()
             editText7.text.clear()
             ResetOptionState()
+            GlobalObject.saveQuestions = true
         }
         button_choose_correct.setOnClickListener {
             if (optionState == 6)optionState = 1 else optionState++
