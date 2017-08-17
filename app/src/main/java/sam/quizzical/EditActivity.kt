@@ -27,11 +27,10 @@ class EditActivity : AppCompatActivity() {
         }
         button_add_question.setOnClickListener {
             GlobalObject.questions.add(Question(
-                    editText.text.toString(),editText2.text.toString(),
-                    editText3.text.toString(),editText4.text.toString(),
-                    editText5.text.toString(),editText6.text.toString(),
-                    editText7.text.toString(),optionState
-            ))
+                editText.text.toString(),editText2.text.toString(),
+                editText3.text.toString(),editText4.text.toString(),
+                editText5.text.toString(),editText6.text.toString(),
+                editText7.text.toString(),optionState))
             editText.text.clear()
             editText2.text.clear()
             editText3.text.clear()
@@ -42,6 +41,7 @@ class EditActivity : AppCompatActivity() {
             ResetOptionState()
             GlobalObject.saveQuestions = true
         }
+
         button_choose_correct.setOnClickListener {
             if (optionState == 6)optionState = 1 else optionState++
             when(optionState){
@@ -53,6 +53,5 @@ class EditActivity : AppCompatActivity() {
                 6-> textView.text = "F"
             }
         }
-        button_clear_questions.setOnClickListener { GlobalObject.ClearQuestions() }
     }
 }

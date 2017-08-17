@@ -126,7 +126,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:layout_weight="0.15"
         android:baselineAligned="false"
         android:gravity="center"
@@ -138,7 +138,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="35dp"
             android:layout_marginRight="10dp"
-            android:text="Edit Quiz"
+            android:text="New Quiz"
             android:textSize="10sp" />
 
         <Button
@@ -165,7 +165,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:text="clear history"
+            android:text="clear data"
             android:textSize="10sp" />
 
     </LinearLayout>

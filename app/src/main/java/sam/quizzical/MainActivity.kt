@@ -33,10 +33,15 @@ class MainActivity : AppCompatActivity() {
         if(GlobalObject.saveQuestions){
             SaveQuestions()
             GlobalObject.saveQuestions = false
-        }
-        if(CheckDBexist()){
             ReadDBquestions()
+        }else{
+            if(CheckDBexist()){
+                ReadDBquestions()
+            }else{
+                GlobalObject.SetDefaultQuestions()
+            }
         }
+
         ReadDBscores()
         InitViews()
         RetryQuiz()
@@ -45,13 +50,13 @@ class MainActivity : AppCompatActivity() {
     fun InitViews(){
         textView_correctAnswers.text = "0"
         button_edit.setOnClickListener {
+            GlobalObject.ClearQuestions()
             startActivity(Intent(this,EditActivity::class.java))
         }
         button_clear_history.setOnClickListener {
             pultusORM.drop(ScoreTime())
             pultusORM.drop(QuestionList())
             pultusORM.drop(DataExists())
-            GlobalObject.dbexist = false
             this.recreate()
         }
         button_reset.setOnClickListener { RetryQuiz() }
@@ -121,7 +126,7 @@ class MainActivity : AppCompatActivity() {
 
     fun UpdateTextViews(){
         if (currentQuestionNumber == -1){
-            textview_question.text =  "Press Retry to Take the Quiz"
+            textview_question.text =  getString(R.string.press_retry)
             textView_option1.text = ""
             textView_option2.text = ""
             textView_option3.text = ""
@@ -142,9 +147,9 @@ class MainActivity : AppCompatActivity() {
     fun OptionClicked(button_number: Int){
         if (button_number == currentQuestion.correct_option){
             textView_correctAnswers.text = (textView_correctAnswers.text.toString().toInt() + 1).toString()
-            Toast.makeText(this,"Correct!",0).show()
+            Toast.makeText(this,getString(R.string.correct),0).show()
         } else{
-            Toast.makeText(this,"Incorrect",0).show()
+            Toast.makeText(this,getString(R.string.incorrect),0).show()
         }
         NextQuestion()
         UpdateTextViews()
@@ -175,7 +180,6 @@ class MainActivity : AppCompatActivity() {
             history.add(Pair(st.score,st.time))
         }
     }
-
     fun CheckDBexist():Boolean{
         val exists = pultusORM.find(DataExists())
         for (v in exists){
@@ -207,7 +211,6 @@ class MainActivity : AppCompatActivity() {
     }
     fun SaveQuestions(){
         val ques = QuestionList()
-
         if(GlobalObject.questions.size >= 1){
             ques.q0q = GlobalObject.questions[0].question_text
             ques.q0a = GlobalObject.questions[0].option1
@@ -218,8 +221,6 @@ class MainActivity : AppCompatActivity() {
             ques.q0f = GlobalObject.questions[0].option6
             ques.q0g = GlobalObject.questions[0].correct_option
         }
-
-
         if(GlobalObject.questions.size >= 2){
             ques.q1q = GlobalObject.questions[1].question_text
             ques.q1a = GlobalObject.questions[1].option1
@@ -230,8 +231,6 @@ class MainActivity : AppCompatActivity() {
             ques.q1f = GlobalObject.questions[1].option6
             ques.q1g = GlobalObject.questions[1].correct_option
         }
-
-
         if(GlobalObject.questions.size >= 3){
             ques.q2q = GlobalObject.questions[2].question_text
             ques.q2a = GlobalObject.questions[2].option1
@@ -242,8 +241,6 @@ class MainActivity : AppCompatActivity() {
             ques.q2f = GlobalObject.questions[2].option6
             ques.q2g = GlobalObject.questions[2].correct_option
         }
-
-
         if(GlobalObject.questions.size >= 4){
             ques.q3q = GlobalObject.questions[3].question_text
             ques.q3a = GlobalObject.questions[3].option1
@@ -254,7 +251,6 @@ class MainActivity : AppCompatActivity() {
             ques.q3f = GlobalObject.questions[3].option6
             ques.q3g = GlobalObject.questions[3].correct_option
         }
-
         if(GlobalObject.questions.size >= 5){
             ques.q4q = GlobalObject.questions[4].question_text
             ques.q4a = GlobalObject.questions[4].option1
@@ -334,6 +330,7 @@ class MainActivity : AppCompatActivity() {
         pultusORM.save(ques)
         val de = DataExists()
         de.data_exists = true
+        pultusORM.drop(DataExists())
         pultusORM.save(de)
     }
 
