@@ -9,66 +9,53 @@
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:hint="Question"
         android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/editText2"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="A"
+        android:hint="Option A"
         android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/editText3"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="B"
+        android:hint="Option B"
         android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/editText4"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="C"
+        android:hint="Option C"
         android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/editText5"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="D"
+        android:hint="Option D"
         android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/editText6"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="E"
+        android:hint="Option E"
         android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/editText7"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="F"
-        android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="401dp" />
-
-    <Button
-        android:id="@+id/button_add_question"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add Question" />
-
-    <Button
-        android:id="@+id/button_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="back to quiz" />
+        android:hint="Option F"
+        android:inputType="textPersonName" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -89,5 +76,17 @@
             android:layout_weight="1"
             android:text="TextView" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button_add_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Question" />
+
+    <Button
+        android:id="@+id/button_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="back to quiz" />
 
 </LinearLayout>

@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     val pultusORM: PultusORM by lazy { PultusORM("quiz.db", appPath) }
     val TIME_LIMIT = "03:00"
     val ANIMATION_TIME:Long = 300
+    var lock_ftb = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,6 +63,7 @@ class MainActivity : AppCompatActivity() {
         chronometer_time.onChronometerTickListener = object: OnChronometerTickListener{
             override fun onChronometerTick(chronometer: Chronometer?) {
                 if(chronometer?.text == TIME_LIMIT){
+                    lock_ftb = false
                     StopQuiz()
                     UpdateTextViews()
                 }
@@ -70,8 +72,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun NextQuestion(){
-        if(currentQuestionNumber == GlobalObject.questions.size-1 ||  GlobalObject.questions.size < 1) {
-            //Toast.makeText(this,"nextQ: qListSize ${GlobalObject.questions.size} currQNum $currentQuestionNumber",0).show()
+        if(currentQuestionNumber == GlobalObject.questions.size-1) {
             StopQuiz()
             UpdateTextViews()
         }else if(currentQuestionNumber+1 in 0..GlobalObject.questions.size-1) {
@@ -91,7 +92,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun StopQuiz(){
-        Handler().postDelayed({ if(this@MainActivity.applicationContext != null){ folding_tab_bar.rollUp() } },ANIMATION_TIME)
+        Handler().postDelayed({ if(this@MainActivity.applicationContext != null){
+            if(!lock_ftb){
+                folding_tab_bar.rollUp()
+                lock_ftb = true
+            }
+        } },ANIMATION_TIME)
         chronometer_time.stop()
         currentQuestion = Question()
         currentQuestionNumber = -1

@@ -21,7 +21,7 @@ class FoldingTabBar : LinearLayout {
     interface OnFoldingItemSelectedListener { fun onFoldingItemSelected(item: MenuItem): Boolean }
     var onFoldingItemClickListener: OnFoldingItemSelectedListener? = null
 
-    private val CLOSE_ON_SELECT = false
+    private val CLOSE_ON_SELECT = true
     private val ALLOW_USER_EXPAND = false
     private val ANIMATION_DURATION = 500L
     private val START_DELAY = 150L
