@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Quizzical</string>
+    <string name="app_name">Easy Quiz Maker</string>
     <string name="press_retry">Press Retry to Take the Quiz</string>
     <string name="correct">Correct!</string>
     <string name="incorrect">Incorrect</string>
